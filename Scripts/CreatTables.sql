@@ -1,7 +1,7 @@
 CREATE TABLE story(
     ID INT NOT NULL IDENTITY PRIMARY KEY,
     title VARCHAR(100),
-    story_text VARCHAR(MAX),
+    content VARCHAR(MAX),
     creation_date DATETIME NOT NULL,
 );
 
