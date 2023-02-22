@@ -1,0 +1,9 @@
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=lksdjfghg//879453/fdhsiuj" -p 1602:1433 --name storyverse --hostname storyverseHost -d mcr.microsoft.com/mssql/server:2022-latest
+
+docker exec -it storyverse "bash"
+
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "lksdjfghg//879453/fdhsiuj"
+
+CREATE DATABASE StoryverseDB
+SELECT Name from sys.Databases
+GO
