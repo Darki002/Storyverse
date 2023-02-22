@@ -10,7 +10,7 @@ public partial class StoryverseContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        optionsBuilder.UseSqlServer(@"Data Source=localhost;Initial Catalog=storyverseDB;User ID=sa;Password=sadkjsf//234526; TrustServerCertificate=Yes;");
+        optionsBuilder.UseSqlServer(@"Data Source=localhost;Initial Catalog=StoryverseDB;User ID=sa;Password=lksdjfghg//879453/fdhsiuj; TrustServerCertificate=Yes;");
     }
 
     public virtual DbSet<Story> Stories { get; set; }
