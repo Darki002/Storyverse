@@ -45,6 +45,8 @@ public class StoryRepository : IStoryRepository
 
     public Story? GetSingleOrDefaultById(int id)
     {
-        throw new NotImplementedException();
+        using var context = new StoryverseContext();
+        var story = context.Stories.SingleOrDefault(s => s.Id == id);
+        return story is null ? null : StoryMapper.Map(story);
     }
 }

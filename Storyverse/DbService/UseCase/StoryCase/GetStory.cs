@@ -11,5 +11,5 @@ public class GetStory
         this.storyRepository = storyRepository;
     }
 
-    public void SingleOrDefaultById(int id) => storyRepository.GetSingleOrDefaultById(id);
+    public Story? SingleOrDefaultById(int id) => storyRepository.GetSingleOrDefaultById(id);
 }
