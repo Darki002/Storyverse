@@ -6,9 +6,7 @@ public interface IStoryRepository
 
     void Delete(int id);
     
-    void UpdateTitle(int id, string newTitle);
-
-    void UpdateContent(int id, string newContent);
+    void Update(int id, Story updatedStory);
 
     Story? GetSingleOrDefaultById(int id);
 }

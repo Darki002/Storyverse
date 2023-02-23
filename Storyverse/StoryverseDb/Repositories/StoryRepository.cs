@@ -1,4 +1,5 @@
-﻿using DbService;
+﻿using System.IO.MemoryMappedFiles;
+using DbService;
 using DbService.Repositories;
 using StoryverseDb.Mapping;
 
@@ -23,23 +24,14 @@ public class StoryRepository : IStoryRepository
         context.SaveChanges();
     }
 
-    public void UpdateTitle(int id, string newTitle)
+    public void Update(int id, Story updatedStory)
     {
         using var context = new StoryverseContext();
         var existingStory = context.Stories.SingleOrDefault(s => s.Id == id);
         if (existingStory is null) throw new ArgumentException($"Story with id {id} not found");
 
-        existingStory.Title = newTitle;
-        context.SaveChanges();
-    }
-
-    public void UpdateContent(int id, string newContent)
-    {
-        using var context = new StoryverseContext();
-        var existingStory = context.Stories.SingleOrDefault(s => s.Id == id);
-        if (existingStory is null) throw new ArgumentException($"Story with id {id} not found");
-
-        existingStory.Content = newContent;
+        existingStory.Title = updatedStory.Title;
+        existingStory.Content = updatedStory.Content;
         context.SaveChanges();
     }
 

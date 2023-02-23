@@ -4,27 +4,18 @@ namespace DbService.UseCase.StoryCase;
 
 public class UpdateStory
 {
-    public class ContentHandler
+    public class Handler
     {
         private readonly IStoryRepository storyRepository;
 
-        public ContentHandler(IStoryRepository storyRepository)
+        public Handler(IStoryRepository storyRepository)
         {
             this.storyRepository = storyRepository;
         }
 
-        public void Execute(int id, string newContent) => storyRepository.UpdateContent(id, newContent);
-    }
-    
-    public class TitleHandler
-    {
-        private readonly IStoryRepository storyRepository;
-
-        public TitleHandler(IStoryRepository storyRepository)
+        public void Execute(int id, Story updatedStory)
         {
-            this.storyRepository = storyRepository;
+            storyRepository.Update(id, updatedStory);
         }
-
-        public void Execute(int id, string newTitle) => storyRepository.UpdateTitle(id, newTitle);
     }
 }

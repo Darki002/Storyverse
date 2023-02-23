@@ -4,12 +4,16 @@ namespace DbService.UseCase.StoryCase;
 
 public class GetStory
 {
-    private readonly IStoryRepository storyRepository;
-
-    public GetStory(IStoryRepository storyRepository)
+    public class Handler
     {
-        this.storyRepository = storyRepository;
+        private readonly IStoryRepository storyRepository;
+        public Handler(IStoryRepository storyRepository)
+        {
+            this.storyRepository = storyRepository;
+        }
+        
+        public Story? SingleOrDefaultById(int id) => storyRepository.GetSingleOrDefaultById(id);
     }
 
-    public Story? SingleOrDefaultById(int id) => storyRepository.GetSingleOrDefaultById(id);
+    
 }
