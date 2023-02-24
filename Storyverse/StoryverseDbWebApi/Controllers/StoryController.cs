@@ -1,13 +1,15 @@
 ﻿using DbService;
 using DbService.Repositories;
 using DbService.UseCase.StoryCase;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using StoryverseDb.Repositories;
 
 namespace StoryverseDbWebApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]/[action]")]
+[EnableCors("AllowOrigin")]
 public class StoryController : ControllerBase
 {
     [HttpGet(Name = "GetStory")]
@@ -21,7 +23,7 @@ public class StoryController : ControllerBase
     }
 
     [HttpPost(Name = "SaveStory")]
-    public IActionResult SaveStory([FromHeader]Story story)
+    public IActionResult SaveStory([FromBody]Story story)
     {
         IStoryRepository repo = new StoryRepository();
         var addStory = new AddStory.Handler(repo);
@@ -34,7 +36,7 @@ public class StoryController : ControllerBase
     {
         IStoryRepository repo = new StoryRepository();
         var storyUpdater = new UpdateStory.Handler(repo);
-        storyUpdater.Execute(id, updatedStory);
-        return Ok();
+        var result = storyUpdater.Execute(id, updatedStory);
+        return result.IsSuccess ? Ok() : BadRequest(result.Exception);
     }
 }

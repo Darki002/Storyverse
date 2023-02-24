@@ -1,4 +1,5 @@
 ﻿using DbService.Repositories;
+using DbService.UseCase.Results;
 
 namespace DbService.UseCase.StoryCase;
 
@@ -13,9 +14,17 @@ public class UpdateStory
             this.storyRepository = storyRepository;
         }
 
-        public void Execute(int id, Story updatedStory)
+        public Result Execute(int id, Story updatedStory)
         {
-            storyRepository.Update(id, updatedStory);
+            try
+            {
+                storyRepository.Update(id, updatedStory);
+                return new Result(true);
+            }
+            catch (ArgumentException e)
+            {
+                return new Result(false, e);
+            }
         }
     }
 }
