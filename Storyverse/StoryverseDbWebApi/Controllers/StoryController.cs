@@ -1,8 +1,8 @@
-﻿using DbService;
-using DbService.Repositories;
+﻿using DbService.Repositories;
 using DbService.UseCase.StoryCase;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using StoryverseDb.Modul;
 using StoryverseDb.Repositories;
 
 namespace StoryverseDbWebApi.Controllers;
@@ -23,20 +23,20 @@ public class StoryController : ControllerBase
     }
 
     [HttpPost(Name = "SaveStory")]
-    public IActionResult SaveStory([FromBody]Story story)
+    public IActionResult SaveStory([FromBody]Models.Story story)
     {
         IStoryRepository repo = new StoryRepository();
         var addStory = new AddStory.Handler(repo);
-        addStory.Execute(story);
+        addStory.Execute(story.Map());
         return Ok();
     }
 
     [HttpPost(Name = "UpdateStory")]
-    public IActionResult UpdateStory(int id, [FromHeader] Story updatedStory)
+    public IActionResult UpdateStory(int id, [FromBody] Models.Story updatedStory)
     {
         IStoryRepository repo = new StoryRepository();
         var storyUpdater = new UpdateStory.Handler(repo);
-        var result = storyUpdater.Execute(id, updatedStory);
+        var result = storyUpdater.Execute(id, updatedStory.Map());
         return result.IsSuccess ? Ok() : BadRequest(result.Exception);
     }
 }
